@@ -13,6 +13,11 @@ Test:
 make test
 ```
 
+Install to use as a global binary:
+```
+make install
+```
+
 Usage:
 ```
 ./pdfgen
