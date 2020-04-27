@@ -45,7 +45,7 @@ var Formats = map[string]gofpdf.SizeType{
 	"XL":                gofpdf.SizeType{Wd: 279.41, Ht: 431.81},
 }
 
-func GetSize(format string, orientation string) (*gofpdf.SizeType, bool) {
+func GetSize(format string, orientation string, bleed bool) (*gofpdf.SizeType, bool) {
 	size, found := Formats[format]
 
 	if !found {
@@ -54,6 +54,10 @@ func GetSize(format string, orientation string) (*gofpdf.SizeType, bool) {
 
 	if orientation == "L" {
 		size = gofpdf.SizeType{Wd: size.Ht, Ht: size.Wd}
+	}
+
+	if bleed {
+		size = gofpdf.SizeType{Wd: size.Wd + 8, Ht: size.Ht + 8}
 	}
 
 	return &size, true

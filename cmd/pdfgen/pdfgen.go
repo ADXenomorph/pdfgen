@@ -12,7 +12,8 @@ import (
 
 func main() {
 	format := flag.String("f", "", "Paper format")
-	orientation := flag.String("o", "P", "Orientation P for portrait, L for landscape. Ignored if height of width are specified")
+	bleed := flag.Bool("b", false, "Add an 8 mm bleed area to the size. Ignored if height or width are specified")
+	orientation := flag.String("o", "P", "Orientation P for portrait, L for landscape. Ignored if height or width are specified")
 
 	width := flag.Float64("w", 0, "Width. Ignored if format is specified")
 	height := flag.Float64("h", 0, "Height. Ignored if format is specified")
@@ -34,7 +35,7 @@ func main() {
 	var size *gofpdf.SizeType
 	if *format != "" {
 		var found bool
-		size, found = pdf.GetSize(*format, *orientation)
+		size, found = pdf.GetSize(*format, *orientation, *bleed)
 		if !found {
 			fmt.Printf("Unknown format %s\n", *format)
 			fmt.Println(pdf.GetFormatsHelp())
@@ -59,4 +60,6 @@ func main() {
 		fmt.Printf("error: %s", err)
 		os.Exit(1)
 	}
+
+	fmt.Printf("Saved to %s\n", params.OutputPath)
 }
