@@ -6,7 +6,7 @@ build: ## Build the binary
 test: ## Run tests
 	go clean -testcache && go test ./...
 
-Install: build ## Install as a binary
+install: build ## Install as a binary
 	go install cmd/pdfgen/pdfgen.go
 
 # Absolutely awesome: http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
