@@ -36,7 +36,8 @@ func (pdf *Pdf) CreatePdf() {
 	pdf.fpdf.SetMargins(0, 0, 0)
 	pdf.fpdf.SetAutoPageBreak(true, 0)
 
-	pdf.fpdf.SetFont("Arial", "", pdf.getFontSize())
+	pdf.fpdf.AddFontFromBytes("hack", "", HackFontJson, HackFontZ)
+	pdf.fpdf.SetFont("hack", "", pdf.getFontSize())
 
 	for i := 1; i <= pdf.params.PageCount; i++ {
 		pdf.fpdf.AddPage()
